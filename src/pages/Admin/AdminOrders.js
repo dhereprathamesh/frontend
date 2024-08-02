@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../context/auth";
-import axios from "axios";
 import Layout from "../../components/layout/Layout";
 import AdminMenu from "../../components/layout/AdminMenu";
 import { Select } from "antd";
 import moment from "moment";
+import axios from "axios";
 const { Option } = Select;
 
 const AdminOrders = () => {
@@ -20,7 +20,9 @@ const AdminOrders = () => {
   const [auth, setAuth] = useAuth();
   const getOrders = async () => {
     try {
-      const { data } = await axios.get("/api/v1/auth/all-orders");
+      const { data } = await axios.get(
+        "https://backend-h1ht.onrender.com/api/v1/auth/all-orders"
+      );
       setOrders(data);
     } catch (error) {
       console.log(error);
@@ -33,9 +35,12 @@ const AdminOrders = () => {
 
   const handleChange = async (orderId, value) => {
     try {
-      const { data } = await axios.put(`/api/v1/auth/order-status/${orderId}`, {
-        status: value,
-      });
+      const { data } = await axios.put(
+        `https://backend-h1ht.onrender.com/api/v1/auth/order-status/${orderId}`,
+        {
+          status: value,
+        }
+      );
       getOrders();
     } catch (error) {
       console.log(error);
@@ -49,7 +54,6 @@ const AdminOrders = () => {
         </div>
         <div className="col-md-9">
           <h1 className="text-center">All Orders</h1>
-          {console.log("orders", orders)}
           {orders?.map((o, i) => {
             return (
               <div className="border shadow">
@@ -92,7 +96,7 @@ const AdminOrders = () => {
                     <div className="row mb-2 p-3 card flex-row" key={p._id}>
                       <div className="col-md-4">
                         <img
-                          src={`/api/v1/product/product-photo/${p._id}`}
+                          src={`https://backend-h1ht.onrender.com/api/v1/product/product-photo/${p._id}`}
                           className="card-img-top"
                           alt={p.name}
                           width="50px"

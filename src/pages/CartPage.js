@@ -3,9 +3,9 @@ import { useAuth } from "../context/auth";
 import { useCart } from "../context/cart";
 import { useNavigate } from "react-router-dom";
 import DropIn from "braintree-web-drop-in-react";
-import axios from "axios";
 import toast from "react-hot-toast";
 import Layout from "../components/layout/Layout";
+import axios from "axios";
 import "../styles/CartStyles.css";
 
 const CartPage = () => {
@@ -47,7 +47,9 @@ const CartPage = () => {
   //get payment gateway token
   const getToken = async () => {
     try {
-      const { data } = await axios.get("/api/v1/product/braintree/token");
+      const { data } = await axios.get(
+        "https://backend-h1ht.onrender.com/api/v1/product/braintree/token"
+      );
       setClientToken(data?.clientToken);
     } catch (error) {
       console.log(error);
@@ -62,10 +64,13 @@ const CartPage = () => {
     try {
       setLoading(true);
       const { nonce } = await instance.requestPaymentMethod();
-      const { data } = await axios.post("/api/v1/product/braintree/payment", {
-        nonce,
-        cart,
-      });
+      const { data } = await axios.post(
+        "https://backend-h1ht.onrender.com/api/v1/product/braintree/payment",
+        {
+          nonce,
+          cart,
+        }
+      );
       setLoading(false);
       localStorage.removeItem("cart");
       setCart([]);
@@ -103,7 +108,7 @@ const CartPage = () => {
                 <div className="row card flex-row" key={p._id}>
                   <div className="col-md-4">
                     <img
-                      src={`/api/v1/product/product-photo/${p._id}`}
+                      src={`https://backend-h1ht.onrender.com/api/v1/product/product-photo/${p._id}`}
                       className="card-img-top"
                       alt={p.name}
                       width="100%"

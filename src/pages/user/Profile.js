@@ -1,9 +1,9 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import UserMenu from "../../components/layout/UserMenu";
 import Layout from "../../components/layout/Layout";
 import { useAuth } from "../../context/auth";
+import axios from "axios";
 
 const Profile = () => {
   //context
@@ -28,13 +28,16 @@ const Profile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.put("/api/v1/auth/profile", {
-        name,
-        email,
-        password,
-        phone,
-        address,
-      });
+      const { data } = await axios.put(
+        "https://backend-h1ht.onrender.com/api/v1/auth/profile",
+        {
+          name,
+          email,
+          password,
+          phone,
+          address,
+        }
+      );
       if (data?.error) {
         toast.error(data?.error);
       } else {

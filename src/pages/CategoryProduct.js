@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../components/layout/Layout";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
 import "../styles/CategoryProductStyles.css";
+import axios from "axios";
 
 const CategoryProduct = () => {
   const params = useParams();
@@ -16,7 +16,7 @@ const CategoryProduct = () => {
   const getPrductsByCat = async () => {
     try {
       const { data } = await axios.get(
-        `/api/v1/product/product-category/${params.slug}`
+        `https://backend-h1ht.onrender.com/api/v1/product/product-category/${params.slug}`
       );
       setProducts(data?.products);
       setCategory(data?.category);
@@ -36,7 +36,7 @@ const CategoryProduct = () => {
               {products?.map((p) => (
                 <div className="card m-2" key={p._id}>
                   <img
-                    src={`/api/v1/product/product-photo/${p._id}`}
+                    src={`https://backend-h1ht.onrender.com/api/v1/product/product-photo/${p._id}`}
                     className="card-img-top"
                     alt={p.name}
                   />

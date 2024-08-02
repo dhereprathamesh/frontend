@@ -1,10 +1,10 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import Layout from "../../components/layout/Layout";
 import AdminMenu from "../../components/layout/AdminMenu";
 import { Select } from "antd";
+import axios from "axios";
 
 const { Option } = Select;
 
@@ -22,7 +22,9 @@ const CreateProduct = () => {
   //get all category
   const getAllCategory = async () => {
     try {
-      const { data } = await axios.get("/api/v1/category/get-category");
+      const { data } = await axios.get(
+        "https://backend-h1ht.onrender.com/api/v1/category/get-category"
+      );
       if (data?.success) {
         setCategories(data?.category);
       }
@@ -48,7 +50,7 @@ const CreateProduct = () => {
       productData.append("photo", photo);
       productData.append("category", category);
       const { data } = axios.post(
-        "/api/v1/product/create-product",
+        "https://backend-h1ht.onrender.com/api/v1/product/create-product",
         productData
       );
       if (data?.success) {

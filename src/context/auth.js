@@ -8,8 +8,10 @@ const AuthProvider = ({ children }) => {
     token: "",
   });
 
-  //default axios
-  axios.defaults.headers.common["Authorization"] = auth?.token;
+  useEffect(() => {
+    // Set Axios default authorization header dynamically
+    axios.defaults.headers.common["Authorization"] = auth?.token;
+  }, [auth.token]);
 
   useEffect(() => {
     const data = localStorage.getItem("auth");

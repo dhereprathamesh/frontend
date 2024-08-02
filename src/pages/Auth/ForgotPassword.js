@@ -1,8 +1,8 @@
-import axios from "axios";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import Layout from "../../components/layout/Layout";
+import axios from "axios";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -15,11 +15,14 @@ const ForgotPassword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/api/v1/auth/forgot-password", {
-        email,
-        newPassword,
-        answer,
-      });
+      const res = await axios.post(
+        "https://backend-h1ht.onrender.com/api/v1/auth/forgot-password",
+        {
+          email,
+          newPassword,
+          answer,
+        }
+      );
       if (res && res.data.success) {
         toast.success(res.data && res.data.message);
 

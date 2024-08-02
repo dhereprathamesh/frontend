@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Layout from "../../components/layout/Layout";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import toast from "react-hot-toast";
 import "../../styles/AuthStyles.css";
+import axios from "axios";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -18,14 +18,17 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/api/v1/auth/register", {
-        name,
-        email,
-        password,
-        phone,
-        address,
-        answer,
-      });
+      const res = await axios.post(
+        "https://backend-h1ht.onrender.com/api/v1/auth/register",
+        {
+          name,
+          email,
+          password,
+          phone,
+          address,
+          answer,
+        }
+      );
       if (res && res.data.success) {
         toast.success(res.data && res.data.message);
         navigate("/login");

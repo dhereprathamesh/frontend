@@ -1,7 +1,7 @@
-import axios from "axios";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useSearch } from "../../context/search";
+import axios from "axios";
 
 const SearchInput = () => {
   const [values, setValues] = useSearch();
@@ -11,7 +11,7 @@ const SearchInput = () => {
     e.preventDefault();
     try {
       const { data } = await axios.get(
-        `/api/v1/product/search/${values.keyword}`
+        `https://backend-h1ht.onrender.com/api/v1/product/search/${values.keyword}`
       );
       setValues({ ...values, results: data });
       navigate("/search");
